@@ -1,6 +1,7 @@
 
 
-INSERT INTO burgers (burger_name, devoured, date) VALUES ("Cheese Burger", false, timestamp);
-INSERT INTO burgers (burger_name, devoured, date) VALUES ("Bacon Burger", false, timestamp);
-INSERT INTO burgers (burger_name, devoured, date) VALUES ("Veggie Burger", false, timestamp);
+INSERT INTO burgers (burger_name) VALUES ("Cheeseburger");
+INSERT INTO burgers (burger_name) VALUES ("Bacon Burger");
+INSERT INTO burgers (burger_name) VALUES ("Veggie Burger");
 
+SELECT * FROM burgers;
