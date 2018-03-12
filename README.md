@@ -14,7 +14,7 @@
 
 ## Screenshot
 
-![Image of Command Line](eatdaburgerscreenshot.png)
+![Image of Command Line](eatdaburgerscreenshot.PNG)
 
 ## Languages/Libraries used:
 
