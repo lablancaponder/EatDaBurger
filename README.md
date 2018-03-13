@@ -8,7 +8,7 @@
 
 * Each burger in the waiting area also has a `Devour it!` button. When the user clicks it, the burger will move to the eaten area.
 
-## GitHub Repo: https://github.com/lponder82/EatDaBurger.git
+## GitHub Repo: https://lponder82.github.io/EatDaBurger/
 
 
 
