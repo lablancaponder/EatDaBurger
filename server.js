@@ -1,59 +1,57 @@
 var express = require("express");
 var handlebars = require("express-handlebars");
-var bodyparser = require("body-parser");
+var bodyParser = require("body-parser");
 var override = require("method-override");
 var path = require("path");
+var mysql = require("mysql");
 
 
-// // MSYQL CONNECTION
-
-// var connection = mysql.createConnection({
-//     host    : "localhost",
-//     user    : "root",
-//     password: "P1@yap1aya",
-//     database: "burgers_db"
-// });
 
 
-// connection.connect((err) => {
-//     if (err) {
-//         throw err;
-//     }
-//     console.log("MySql connected...");
-// });
+// MSYQL CONNECTION
+
+var connection = mysql.createConnection({
+    host    : "localhost",
+    user    : "root",
+    password: "P1@yap1aya",
+    database: "burgers_db"
+});
+
+
+connection.connect((err) => {
+    if (err) {
+        throw err;
+    }
+    console.log("MySql connected...");
+});
 
 
 // EXPRESS SETUP
 
+
+var port = process.env.PORT || 3000;
+
 var app = express();
 
-app.set("views", path.join(__dirname, "views"));
-app.engine("handlebars", handlebars({defaultLayout: "main"}));
+// Serve static content for the app from the "public" directory in the application directory.
+app.use(express.static("public"));
+
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+app.use(bodyParser.json());
+
+// Set Handlebars.
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({
+    defaultLayout: "../index"
+}));
 app.set("view engine", "handlebars");
 
-app.set("port", (process.env.PORT || 3000));
+// Import routes and give the server access to them.
+var routes = require("./controllers/burgers_controller.js");
 
-app.get("/", function(req, res){
-    res.render("index");
-});
+app.use("/", routes);
 
-app. listen(app.get("port"), function() {
-    console.log("Server started on port " +app.get("port"))
-});
-
-app.use(express.static(__dirname + "/public"));
-
-
-
-// // CREATE DB
-// app.get("/createdb", (req, res) => {
-//     let sql = "CREATE DATABASE burgers_db";
-//     connection.query(sql, (err, result) => {
-//         if (err) throw err;
-//         console.log(result);
-//         res.send("Database created...");
-//     });
-// });
-
-
-
+app.listen(port);
